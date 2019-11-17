@@ -1,0 +1,28 @@
+<component name="libraryTable">
+  <library name="Jersey-2.2" type="JAX-RS">
+    <properties version="2.2" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/jersey-container-servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/javax.ws.rs-api-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/jersey-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/jersey-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/jersey-container-servlet-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/jersey-server.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/asm-all-repackaged-2.2.0-b14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/cglib-2.2.0-b14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/hk2-locator-2.2.0-b14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/hk2-api-2.2.0-b14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/hk2-utils-2.2.0-b14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/guava-14.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/javax.annotation-api-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/javax.inject-2.2.0-b14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/javax.servlet-api-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/osgi-resource-locator-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/jaxb-api-2.2.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/org.osgi.core-4.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Jersey/validation-api-1.1.0.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

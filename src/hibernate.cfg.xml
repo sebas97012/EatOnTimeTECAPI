@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/EatOnTimeTECDB</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">qwerty</property>
+        <mapping class="xtec.eott.DAO.Dish"/>
+        <mapping class="xtec.eott.DAO.Menu"/>
+        <mapping class="xtec.eott.DAO.MenuDish"/>
+        <mapping class="xtec.eott.DAO.OrderDish"/>
+        <mapping class="xtec.eott.DAO.Orders"/>
+        <mapping class="xtec.eott.DAO.Preference"/>
+        <mapping class="xtec.eott.DAO.Province"/>
+        <mapping class="xtec.eott.DAO.Role"/>
+        <mapping class="xtec.eott.DAO.User"/>
+        <mapping class="xtec.eott.DAO.UserPreference"/>
+        <mapping class="xtec.eott.DAO.UserRole"/>
+
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
