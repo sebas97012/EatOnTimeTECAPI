@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @IdClass(UserPreferencePK.class)
-public class UserPreference {
+public class UserPreference extends DAO {
     private int idUser;
     private int idPreference;
 

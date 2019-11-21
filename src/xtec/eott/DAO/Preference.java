@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Preference {
+public class Preference extends DAO {
     private int idPreference;
     private String preference;
 

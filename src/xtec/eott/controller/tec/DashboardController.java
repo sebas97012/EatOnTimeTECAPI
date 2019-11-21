@@ -1,7 +1,5 @@
 package xtec.eott.controller.tec;
 
-
-
 import xtec.eott.controller.dashboard.DashboardClient;
 
 import javax.ws.rs.GET;

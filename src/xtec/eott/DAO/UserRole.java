@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @IdClass(UserRolePK.class)
-public class UserRole {
+public class UserRole extends DAO {
     private int idUser;
     private int idRole;
 
