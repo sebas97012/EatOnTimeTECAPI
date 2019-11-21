@@ -3,33 +3,33 @@ package xtec.eott.controller.tec;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import xtec.eott.DAO.HibernateUtil;
 import xtec.eott.DAO.User;
 
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/person")
 public class PersonController {
 	
-	@Path("/add")
+	@Path("/signup")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean create_person(String new_person) { 
-		User person = null;
+	public Response sign_up(String new_person) { // JSON: {"idUser":XXXXXXXXX, "name":"XXXXX", "phone":"XXXXXXXX", "province": {"idProvince":X, "provinceName":"San José"}, "email":"XXX@XXX"}
+		ObjectMapper mapper = new ObjectMapper();
 		try {
-			person = new ObjectMapper().readValue(new_person, User.class);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
+			User new_user = mapper.readValue(new_person, User.class);
+			new_user.create();
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
+			return Response.serverError().build();
 		}
-		return true; 
+		return Response.ok("Usuario registrado exitosamente").build();
 	}
-	
-	@Path("/remove/{user_id}")
-	@DELETE
-	public void remove_person(@PathParam("friend_id") int user_id) { }
 	
 	@Path("/orders/{user_id}")
 	@GET

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Dish {
+public class Dish extends DAO{
     private int idDish;
     private String name;
     private Integer points;

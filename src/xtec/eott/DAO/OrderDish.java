@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @IdClass(OrderDishPK.class)
-public class OrderDish {
+public class OrderDish extends DAO {
     private int idOrder;
     private int idDish;
 

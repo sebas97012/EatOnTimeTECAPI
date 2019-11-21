@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class Orders {
+public class Orders extends DAO {
     private int idOrder;
     private int idClient;
     private int idCook;

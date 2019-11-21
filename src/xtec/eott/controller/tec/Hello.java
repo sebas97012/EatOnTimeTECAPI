@@ -16,7 +16,15 @@ public class Hello {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getTestService() {
 		User sebas = new User();
-		sebas = (User)sebas.read(305070015);
-		return sebas.getName()+sebas.getProvince().getProvinceName();
+		sebas.setPoints(0);
+		sebas.setEmail("sebas@elnoob.com");
+		sebas.setIdUser(154845451);
+		sebas.setName("Sebas Mora");
+		sebas.setPhone("55555555");
+		sebas.setProvince(new Province(3));
+		sebas.create();
+		return "INSERTION DONE";
+		//sebas = (User)sebas.read(305070015);
+		//return sebas.getName()+sebas.getProvince().getProvinceName();
 	}
 }

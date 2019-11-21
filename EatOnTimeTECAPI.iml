@@ -14,7 +14,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="2da6f889-3768-4de3-846b-dded9e3fb7fd" />
+          <unit-entry name="hibernate.cfg.xml" value="20ab0def-3222-4ae9-aebe-d2b3933d6712" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
@@ -31,7 +31,16 @@
     <orderEntry type="library" exported="" name="Hibernate 5.4.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.21" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="Jersey-2.2" level="project" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.14" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.14" level="project" />
     <orderEntry type="library" exported="" name="Jackson 2.1" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-5.1.48.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

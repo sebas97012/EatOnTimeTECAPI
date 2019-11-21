@@ -10,13 +10,14 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/login")
 public class LoginController {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean login(String new_login) { 
+	public Response login(String new_login) { // JSON {"user_id":XXXXXXXXXX, "password":"mypasss"}
 		Login login = null;
 		try {
 			login = new ObjectMapper().readValue(new_login, Login.class);
@@ -25,8 +26,6 @@ public class LoginController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(login.user_id);
-		System.out.println(login.password);
-		return true; 
+		return Response.ok("Inicio de sesión exitoso").build();
 	}
 }
