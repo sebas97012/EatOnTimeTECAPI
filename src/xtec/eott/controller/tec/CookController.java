@@ -7,10 +7,7 @@ import org.hibernate.query.Query;
 import xtec.eott.DAO.HibernateUtil;
 import xtec.eott.DAO.Orders;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -30,7 +27,16 @@ public class CookController {
         return Response.ok(mapper.writeValueAsString(orders)).build();
     }
 
-    public Response change_status() {
-        return Response.ok().build(); // TODO: Implement
+    @Path("/update/status/{id_order}")
+    @POST
+    public Response change_status(@PathParam("id_order") int order_id) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update OrderStatus set orderStatus = orderStatus + 10 where idOrder = :id");
+        query.setParameter("id", order_id);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return Response.ok("Status Actualizado").build();
     }
 }

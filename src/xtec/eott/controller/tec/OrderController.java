@@ -53,6 +53,10 @@ public class OrderController {
 		Orders final_order_info = new Orders();
 		final_order_info = (Orders) final_order_info.read(order_id);
 
+		OrderStatus status = new OrderStatus();
+		status.setIdOrder(order_id);
+		status.create();
+
 		return Response.ok(mapper.writeValueAsString(final_order_info)).build();
 	}
 

@@ -20,6 +20,7 @@
         <mapping class="xtec.eott.DAO.UserPreference"/>
         <mapping class="xtec.eott.DAO.UserRole"/>
         <mapping class="xtec.eott.DAO.Friend"/>
+        <mapping class="xtec.eott.DAO.OrderStatus"/>
 
 
         <!-- DB schema will be updated if needed -->
