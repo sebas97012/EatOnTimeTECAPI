@@ -91,6 +91,13 @@ public class MenuController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
 	public Response add_dishes(String dishes) throws JsonProcessingException { // JSON EXPECTED -> ["A", "B", "C", "D", ....]
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("delete from MenuDish");
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+
 	    ObjectMapper mapper = new ObjectMapper();
 	    List<String> dishes_lst = mapper.readValue(dishes, List.class);
         for(String d : dishes_lst) {

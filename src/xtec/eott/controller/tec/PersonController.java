@@ -8,10 +8,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import xtec.eott.DAO.HibernateUtil;
-import xtec.eott.DAO.Preference;
-import xtec.eott.DAO.User;
-import xtec.eott.DAO.UserPreference;
+import xtec.eott.DAO.*;
 
 
 import javax.ws.rs.*;
@@ -38,6 +35,17 @@ public class PersonController {
 		return Response.ok("Usuario registrado exitosamente").build();
 	}
 
+	@Path("/provinces")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response get_provinces() throws JsonProcessingException {
+		Session session = HibernateUtil.getSession();
+		Query query = session.createQuery("from Province ");
+		List<Province> preferences = query.getResultList();
+		ObjectMapper mapper = new ObjectMapper();
+		return Response.ok(mapper.writeValueAsString(preferences)).build();
+	}
+
     /**
      *  Obtiene las preferencias que se pueden seleccionar.
      * @return JSON ARRAY con las preferencias
@@ -48,8 +56,8 @@ public class PersonController {
     @Produces(MediaType.APPLICATION_JSON)
 	public Response get_preferences() throws JsonProcessingException {
         Session session = HibernateUtil.getSession();
-        Query query = session.createQuery("select preference from Preference");
-        List<String> preferences = (List<String>) query.getResultList();
+        Query query = session.createQuery("from Preference");
+        List<Preference> preferences = (List<Preference>) query.getResultList();
         ObjectMapper mapper = new ObjectMapper();
         String pref_arr = mapper.writeValueAsString(preferences);
         return Response.ok(pref_arr).build();

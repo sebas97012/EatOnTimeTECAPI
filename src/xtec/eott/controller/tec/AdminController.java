@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import xtec.eott.DAO.AssignRoleDAO;
-import xtec.eott.DAO.HibernateUtil;
-import xtec.eott.DAO.User;
-import xtec.eott.DAO.UserRole;
+import xtec.eott.DAO.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +46,21 @@ public class AdminController {
             urole.create();
         }
         return Response.ok("Roles asignados exitosamente").build();
+    }
+
+    @Path("/add/preferences")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response add_preferences(String preferences) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<String> prefs = mapper.readValue(preferences, List.class);
+
+        for(String pref : prefs) {
+            Preference new_pref = new Preference();
+            new_pref.setPreference(pref);
+            new_pref.create();
+        }
+        return Response.ok("Preferencias agregadas exitosamente").build();
     }
 
     /**

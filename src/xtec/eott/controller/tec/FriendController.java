@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import xtec.eott.DAO.Friend;
-import xtec.eott.DAO.HibernateUtil;
-import xtec.eott.DAO.User;
-import xtec.eott.DAO.UserFriendDTO;
+import xtec.eott.DAO.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,8 +27,7 @@ public class FriendController {
 		query.setParameter("name", new_user.getName());
 		List<String> matches = query.getResultList();
 		session.close();
-		if(matches.isEmpty()) matches.add("No se encontraron personas con este nombre");
-
+		if(matches.isEmpty()) return Response.ok("No se encontraton personas").build();
 		return Response.ok(mapper.writeValueAsString(matches)).build();
 	}
 
@@ -47,8 +43,7 @@ public class FriendController {
 		query.setParameter("ph", new_user.getPhone());
 		List<String> matches = query.getResultList();
 		session.close();
-		if(matches.isEmpty()) matches.add("No se encontraron personas con este teléfono");
-
+		if(matches.isEmpty()) return Response.ok("No se encontraton personas").build();
 		return Response.ok(mapper.writeValueAsString(matches)).build();
 	}
 
@@ -65,7 +60,7 @@ public class FriendController {
 		new_friend2.setIdUser(new_friend.getIdFriend());
 		new_friend2.create();
 
-		return Response.ok("Amigo añadido exitosamente").build();
+		return Response.ok("Amigo agregado exitosamente").build();
 	}
 
 	@Path("/get/{user_id}")
@@ -87,5 +82,15 @@ public class FriendController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		return Response.ok(mapper.writeValueAsString(friend_dto)).build();
+	}
+
+	@Path("/delete")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response delete_friend(String data) throws JsonProcessingException { // {idUser: XXXXX, idDeleted: XXXXXX}
+		ObjectMapper mapper = new ObjectMapper();
+		Friend del = mapper.readValue(data, Friend.class);
+		del.delete();
+		return Response.ok("Amigo eliminado").build();
 	}
 }

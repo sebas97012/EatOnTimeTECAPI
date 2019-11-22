@@ -4,10 +4,13 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/eatontimetecdb</property>
+        <!-- <property name="connection.url">jdbc:mysql://us-cdbr-iron-east-05.cleardb.net:3306/eatontimetecdb</property> -->
+        <property name="connection.url">jdbc:mysql://us-cdbr-iron-east-05.cleardb.net:3306/heroku_2cb5e7cfcb69dbe</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">marc_sql_g_554_pass</property>
+        <!-- <property name="connection.username">root</property> -->
+        <!-- <property name="connection.password">marc_sql_g_554_pass</property> -->
+        <property name="connection.username">b198caf604c871</property>
+        <property name="connection.password">38ed0d3f</property>
         <mapping class="xtec.eott.DAO.Dish"/>
         <mapping class="xtec.eott.DAO.Menu"/>
         <mapping class="xtec.eott.DAO.MenuDish"/>
