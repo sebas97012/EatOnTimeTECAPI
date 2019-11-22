@@ -19,6 +19,7 @@
         <mapping class="xtec.eott.DAO.User"/>
         <mapping class="xtec.eott.DAO.UserPreference"/>
         <mapping class="xtec.eott.DAO.UserRole"/>
+        <mapping class="xtec.eott.DAO.Friend"/>
 
 
         <!-- DB schema will be updated if needed -->

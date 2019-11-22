@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import xtec.eott.DAO.HibernateUtil;
-import xtec.eott.DAO.OrderDish;
-import xtec.eott.DAO.Orders;
-import xtec.eott.DAO.PlaceOrderDAO;
+import xtec.eott.DAO.*;
 
 
 import javax.ws.rs.*;
@@ -46,12 +43,36 @@ public class OrderController {
 			order_dish.setIdDish(get_id_dish(new_order.dishes.get(i)));
 			order_dish.setIdOrder(order_id);
 
-			int dish_points = get_dish_points(new_order.dishes.get(i)); // TODO: asignar puntos por platillo.
+			int dish_points = get_dish_points(new_order.dishes.get(i));
+			sum_points_to_client(dish_points, new_order.users.get(i));
 
 			order_tmp.create();
 			order_dish.create();
 		}
-		return Response.ok("Order creada con exito").build();
+
+		Orders final_order_info = new Orders();
+		final_order_info = (Orders) final_order_info.read(order_id);
+
+		return Response.ok(mapper.writeValueAsString(final_order_info)).build();
+	}
+
+	@Path("/rate")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response rate_order(String order_info) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		RatingDAO rating = mapper.readValue(order_info, RatingDAO.class);
+
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update Orders set rating = :rate where idOrder = :id");
+		query.setParameter("rate", rating.rating);
+		query.setParameter("id", rating.idOrder);
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+
+		return Response.ok("Orden calificada exitosamente").build();
 	}
 
 	/**
@@ -83,6 +104,22 @@ public class OrderController {
 	}
 
 	/**
+	 * Añade los puntos correspondientes a cada persona dependiendo del platillo.
+	 * @param add_points puntos por sumar.
+	 * @param user_id el id del usuario al que se asignan.
+	 */
+	private void sum_points_to_client(int add_points, int user_id) {
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update User set points = points + :points where idUser = :id");
+		query.setParameter("points", add_points);
+		query.setParameter("id", user_id);
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	/**
 	 * Genera un identificador de orden.
 	 * @param min rango inferior.
 	 * @param max rango superior.
@@ -105,28 +142,6 @@ public class OrderController {
 		Random rd = new Random();
 		return cooks.get(rd.nextInt(cooks.size()));
 	}
-	
-	@Path("/get/{order_id}")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Orders get_order(int order_id) { return new Orders(); }
-	
-	@Path("/remove")
-	@DELETE
-	public boolean remove_order(int order_id) { return true; }
-	
-	@Path("/update/{order_id}")
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean update_dish(@PathParam("order_id") int order_id, String new_vals) { 
-		Orders order = null;
-		try {
-			order = new ObjectMapper().readValue(new_vals, Orders.class);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return true; 
-		}
+
+
 }

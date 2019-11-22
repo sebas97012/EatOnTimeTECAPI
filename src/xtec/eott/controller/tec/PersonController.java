@@ -71,6 +71,16 @@ public class PersonController {
 		return Response.ok("Preferencias asignadas exitosamente").build();
 	}
 
+	@Path("/details/{user_id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response get_user_info(@PathParam("user_id") int user_id) throws JsonProcessingException {
+		User user = new User();
+		user = (User) user.read(user_id);
+		ObjectMapper mapper = new ObjectMapper();
+		return Response.ok(mapper.writeValueAsString(user)).build();
+	}
+
 	/**
 	 * Obtiene el id de una preferencias.
 	 * @param name el nombre de la preferencia.
