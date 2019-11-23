@@ -47,6 +47,24 @@ public class PersonController {
 				.build();
 	}
 
+    @Path("/update/{user_id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update_user(@PathParam("user_id") int user_id, String new_vals) {
+        User user = null;
+        try {
+            user = new ObjectMapper().readValue(new_vals, User.class);
+            user.setIdUser(user_id);
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        user.update();
+        return Response.ok("Usuario actualizado exitosamente").build();
+    }
+
     /**
      *  Obtiene las preferencias que se pueden seleccionar.
      * @return JSON ARRAY con las preferencias
