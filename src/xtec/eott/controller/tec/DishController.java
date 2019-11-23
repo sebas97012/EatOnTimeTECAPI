@@ -54,15 +54,18 @@ public class DishController {
 	@Path("/update/{dish_id}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean update_dish(@PathParam("dish_id") int dish_id, String new_vals) { 
+	public Response update_dish(@PathParam("dish_id") int dish_id, String new_vals) {
 		Dish dish = null;
 		try {
 			dish = new ObjectMapper().readValue(new_vals, Dish.class);
+			dish.setIdDish(dish_id);
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return true; 
+
+		dish.update();
+		return Response.ok("Platillo actualizado exitosamente").build();
 		}
 }
