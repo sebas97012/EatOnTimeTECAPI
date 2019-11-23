@@ -87,7 +87,7 @@ public class FriendController {
 	@Path("/delete")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response delete_friend(String data) throws JsonProcessingException { // {idUser: XXXXX, idDeleted: XXXXXX}
+	public Response delete_friend(String data) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		Friend del = mapper.readValue(data, Friend.class);
 		del.delete();

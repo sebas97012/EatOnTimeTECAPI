@@ -43,7 +43,8 @@ public class PersonController {
 		Query query = session.createQuery("from Province ");
 		List<Province> preferences = query.getResultList();
 		ObjectMapper mapper = new ObjectMapper();
-		return Response.ok(mapper.writeValueAsString(preferences)).build();
+		return Response.ok(mapper.writeValueAsString(preferences))
+				.build();
 	}
 
     /**

@@ -26,6 +26,10 @@ public class LoginController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return Response.ok("Inicio de sesión exitoso").build();
+		return Response.ok("Inicio de sesión exitoso")
+						.header("Acces-Control-Allow-Origin", "*")
+						.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+						.allow("OPTIONS")
+						.build();
 	}
 }
